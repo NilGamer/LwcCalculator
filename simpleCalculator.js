@@ -2,6 +2,8 @@ import { LightningElement, track } from 'lwc';
 
 export default class SimpleCalculator extends LightningElement {
   @track result = '';
+  @track previousResults = [];
+  @track showPreviousResult = false;
   firstNumber = '';
   secondNumber = '';
 
@@ -18,20 +20,28 @@ export default class SimpleCalculator extends LightningElement {
     this.result = `The result is ${
       parseInt(this.firstNumber) + parseInt(this.secondNumber)
     }`;
+    this.previousResults.push(this.result);
   };
   subHandler = () => {
     this.result = `The result is ${
       parseInt(this.firstNumber) - parseInt(this.secondNumber)
     }`;
+    this.previousResults.push(this.result);
   };
   mulHandler = () => {
     this.result = `The result is ${
       parseInt(this.firstNumber) * parseInt(this.secondNumber)
     }`;
+    this.previousResults.push(this.result);
   };
   divHandler = () => {
     this.result = `The result is ${
       parseInt(this.firstNumber) / parseInt(this.secondNumber)
     }`;
+    this.previousResults.push(this.result);
   };
+
+  showPreviousResultToggle(event) {
+    this.showPreviousResult = event.target.checked;
+  }
 }
